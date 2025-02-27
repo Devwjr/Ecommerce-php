@@ -1,5 +1,4 @@
 <?php
-
 require_once 'database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -13,10 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario && password_verify($senha, $usuario['senha'])) {
-        session_start();
-        $_SESSION['usuario_id'] = $usuario['id'];
-        $_SESSION['usuario_nome'] = $usuario['nome'];
-        header('Location: index.php'); 
+        
+        setcookie("usuario_id", $usuario['id'], time() + (7 * 24 * 60 * 60), "/");
+        setcookie("usuario_nome", $usuario['nome'], time() + (7 * 24 * 60 * 60), "/");
+
+        header('Location: index.php');
         exit();
     } else {
         echo 'Email ou senha incorretos!';

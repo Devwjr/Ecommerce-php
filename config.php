@@ -1,0 +1,3 @@
+<?php
+define("MP_ACCESS_TOKEN", "SUA_ACCESS_TOKEN_AQUI");
+?>
